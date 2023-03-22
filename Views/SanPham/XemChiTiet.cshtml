@@ -1,0 +1,111 @@
+﻿@using WEB_NUOCHOA_TQ.Models
+@model SanPham
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/ListSanPhamLayout.cshtml";
+}
+
+
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/LinkChiTietSP/js/jquery.min.js"></script>
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="/LinkChiTietSP/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <!--//theme-style-->
+    
+    <link href="http://fonts.googleapis.com/css?family=Amaranth:400,700" rel="stylesheet" type="text/css">
+    <!--//fonts-->
+    <script type="text/javascript" src="/LinkChiTietSP/js/move-top.js"></script>
+    <script type="text/javascript" src="/LinkChiTietSP/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start menu -->
+    <link href="/LinkChiTietSP/css/megamenu.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/LinkChiTietSP/js/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <link rel="stylesheet" href="/LinkChiTietSP/css/etalage.css">
+    <script src="~/LinkChiTietSP/js/jquery.etalage.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 400,
+                source_image_width: 900,
+                source_image_height: 1200,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+
+
+
+<div class="content">
+    <div class="container" style="margin-bottom: 2%">
+        <div class="single" style="margin-left: 5%">
+            <div class="col-md-9 top-in-single">
+                <div class="col-md-5 single-top">
+                    <ul id="etalage" class="etalage" style="display: block; width: 302px; height: 537px;">
+                        <li class="etalage_thumb thumb_1 etalage_thumb_active" style="display: list-item; background-image: none; opacity: 1;">
+                            <a href="#">
+                                <img class="etalage_thumb_image img-responsive" src="@Model.Anh" style="display: inline; width: 300px; height: 350px; opacity: 1;">
+                            </a>
+                        </li>
+                     </ul>
+
+                </div>
+                <div class="col-md-7 single-top-in">
+                    <div class="single-para">
+                        <h2 style="color: black">@Model.Ten</h2>
+                        <p style="color: red">@Model.TheLoai.Ten</p>
+                        <p>@Model.MoTa</p>
+                        <div class="star-on">
+                            <ul>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                                <li><a href="#"><i> </i></a></li>
+                            </ul>
+                            <div class="clearfix"> </div>
+                        </div>
+
+                        <label class="add-to">@Model.Gia VNĐ</label>
+
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = Model.ID, @strURL = Request.Url.ToString()})" class="cart" style="width: 200px">Thêm vào giỏ hàng</a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+                
+                    <script src="/LinkChiTietSP/js/easyResponsiveTabs.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#horizontalTab').easyResponsiveTabs({
+                                type: 'default', //Types: default, vertical, accordion
+                                width: 'auto', //auto or any width like 600px
+                                fit: true   // 100% fit in a container
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+
+            <div class="clearfix"> </div>
+        </div>
+
+
+    </div>
+
+
+

@@ -1,0 +1,121 @@
+﻿@using System.Web.Mvc.Ajax
+@using WEB_NUOCHOA_TQ.Models
+
+<link rel="stylesheet" href="~/Content/css/LoginForm.css" />
+<link rel="stylesheet" href="~/Content/css/fontawesome-free-6.2.1-web/css/all.css" />
+<div class="header-top" style=" background-color: white;border-bottom: 1px solid black;padding: 0" >
+    <div class="container" >
+        <div class="logo">
+            <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/LOGO.jpg" alt="" width="300px" alt=""></a>
+        </div>
+        <div class="header-left">
+            <ul style="margin-top: 50px;margin-right:10px">
+                @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] != "")
+                {
+                    NguoiDung nd = (NguoiDung)Session["TaiKhoan"];
+                    <li style="margin:5px;color:orange;font-weight: bold">Chào @nd.Ten</li>
+                    @Html.ActionLink("Đăng xuất", "DangXuat", "Home")
+                }
+                else
+                {
+                    <li><a id="btnDangNhap" class="lock" href="#" style="color:black;font-weight:bold">Đăng nhập</a></li>
+                    <li>
+                        <a href="@Url.Action("DangKi","Home")" style="color: black; font-weight: bold">Đăng kí</a>
+                    </li>
+                }
+            </ul>
+            @* Chenf partial gio hang vao layout*@
+            @Html.Action("GioHangPartial", "GioHang")
+
+        </div>
+    </div>
+</div>
+<div id="popup_login">
+    <div class="login-form">
+        <br />
+        <br />
+        <h2 style="display: flex;justify-content: center;">Đăng nhập</h2>
+        <br />
+        <br />
+
+        <div class="icon_close" id="close_form">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: red" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+
+        </div>
+        <div class="form-info" style="display: flex;justify-content: center;">
+            @using (Ajax.BeginForm("DangNhap", "Home", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "ThongBaoSai"
+            }))
+            {
+
+                <input type="text" class="email" name="txtDangNhap" placeholder="Tài khoản" required="" />
+                <input type="password" class="password" name="txtMatKhau" placeholder="Mật khẩu" required="" />
+
+
+                <ul class="login-buttons" style="list-style-type: none">
+                    <li><input type="submit" value="Đăng nhập" /></li>
+                    <li style="display: flex;justify-content: center;align-items: center;height: 60px">
+                        <a href="@Url.Action("DangKi","Home")" class="hvr-sweep-to-left">Đăng kí</a>
+                    </li>
+                </ul>
+            }
+            <div class="clear"> </div>
+        </div>
+    </div>
+</div>
+<style>
+    .login-form {
+        background-color: white;
+        margin-top: 15%;
+        margin-left: 24%;
+        width: 50%;
+        height: 36%;
+    }
+    .icon_close {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+    }
+
+        .icon_close i {
+            width: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .icon_close i:hover {
+                background-color: bisque;
+            }
+
+    #popup_login {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 99;
+        display: none;
+    }
+</style>
+<script type="text/javascript">$("#btnDangNhap").click(function () {
+        $("#popup_login").show()
+
+    });
+    $("#close_form").click(anForm)
+        //function ẩn form
+        function anForm() {
+            $("#popup_login").hide()
+        }</script>
