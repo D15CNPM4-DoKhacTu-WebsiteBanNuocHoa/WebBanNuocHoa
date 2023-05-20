@@ -21,3 +21,5 @@ thay đổi datasoure = tên server name trong sql server
 b6: quay lại visual studio ctrl + f5 để chạy chế độ không debug 
 
 the end!
+## Link Web_BanNuocHoa
+http://quyetvippro22-001-site1.atempurl.com/
